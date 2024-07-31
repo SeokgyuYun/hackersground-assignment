@@ -64,7 +64,7 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast")
 .WithOpenApi();
 
-app.MapPost("/answer", async ([FromBody] AnswerRequest req, QNAService service) =>
+app.MapPost("/summarise", async ([FromBody] AnswerRequest req, QNAService service) =>
 {
     var answer = await service.AnswerAsync(req);
     return answer;
