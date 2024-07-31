@@ -10,13 +10,13 @@
         <div class="col">
             <div class="mb-3">
                 <label for="question" class="form-label"><strong>Question</strong></label>
-                <input class="form-control" id="question" placeholder="Write your question here" @bind="question" />
+                <input class="form-control" id="youtube-link" placeholder="Write your question here" @bind="question" />
             </div>
         </div>
         <div class="col">
             <div class="mb-3">
                 <label for="question-language-code" class="form-label"><strong>Question Language</strong></label>
-                <select class="form-select" id="question-language-code" aria-label="Question language code" @bind="questionLanguageCode">
+                <select class="form-select" id="video-language-code" aria-label="Question language code" @bind="questionLanguageCode">
                     <option value="en" selected>English</option>
                     <option value="ko">Korean</option>
                 </select>
@@ -25,7 +25,7 @@
         <div class="col">
             <div class="mb-3">
                 <label for="answer-language-code" class="form-label"><strong>Answer Language</strong></label>
-                <select class="form-select" id="answer-language-code" aria-label="Answer language code" @bind="answerLanguageCode">
+                <select class="form-select" id="summary-language-code" aria-label="Answer language code" @bind="answerLanguageCode">
                     <option value="en" selected>English</option>
                     <option value="ko">Korean</option>
                 </select>
@@ -35,7 +35,7 @@
 
     <div class="row">
         <div class="mb-3">
-            <button type="button" class="btn btn-primary" @onclick="AnswerAsync">Answer!</button>
+            <button type="button" id="summary" class="btn btn-primary" @onclick="AnswerAsync">Answer!</button>
             <button type="button" class="btn btn-secondary" @onclick="ClearAsync">Clear!</button>
         </div>
     </div>
@@ -43,7 +43,7 @@
     <div class="row">
         <div class="mb-3">
             <label for="answer" class="form-label"><strong>Answer</strong></label>
-            <textarea class="form-control" id="answer" rows="10" placeholder="Answer will show here" readonly>@answer</textarea>
+            <textarea class="form-control" id="result" rows="10" placeholder="Answer will show here" readonly>@answer</textarea>
         </div>
     </div>
 </div>
