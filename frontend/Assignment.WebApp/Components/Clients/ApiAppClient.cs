@@ -13,7 +13,7 @@ public class ApiAppClient(HttpClient http) : IApiAppClient
     public async Task<string> AnswerAsync(string question, string questionLanguageCode, string answerLanguageCode)
     {
         using var response = await _http.PostAsJsonAsync(
-            "answer",
+            "summarise",
             new { question, questionLanguageCode, answerLanguageCode }).ConfigureAwait(false);
 
         var answer = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
