@@ -6,6 +6,9 @@ on:
     branches:
       - main
       - master
+    
+    paths:
+      - '**/*'
 
 # GitHub Actions workflow to deploy to Azure using azd
 # To configure required secrets for connecting to Azure, simply run `azd pipeline config`
@@ -29,23 +32,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-        - name: Install .NET 8 SDK
-          uses: actions/setup-dotnet@v4
-          with:
-            dotnet-version: 8.x
+      - name: Install .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
 
-        - name: Install .NET Aspire workload
-          run: dotnet workload install aspire
+      - name: Install .NET Aspire workload
+        run: dotnet workload install aspire
 
-        - name: Update appsettings.json
-          shell: pwsh
-          run: |
-            $appsettings = Get-Content -Path ./Assignment.AppHost/appsettings.json | ConvertFrom-Json
-            $appsettings.OpenAI.Endpoint = "${{ secrets.AZURE_OPENAI_ENDPOINT }}"
-            $appsettings.OpenAI.ApiKey = "${{ secrets.AZURE_OPENAI_API_KEY }}"
-            $appsettings.OpenAI.DeploymentName = "${{ secrets.AZURE_OPENAI_DEPLOYMENT_NAME }}"
-            $appsettings | ConvertTo-Json -Depth 100 | Out-File -FilePath ./Assignment.AppHost/appsettings.json -Encoding utf8 -Force
-            popd
+      - name: Update appsettings.json
+        shell: pwsh
+        run: |
+          $appsettings = Get-Content -Path ./Assignment.AppHost/appsettings.json | ConvertFrom-Json
+          $appsettings.OpenAI.Endpoint = "${{ secrets.AZURE_OPENAI_ENDPOINT }}"
+          $appsettings.OpenAI.ApiKey = "${{ secrets.AZURE_OPENAI_API_KEY }}"
+          $appsettings.OpenAI.DeploymentName = "${{ secrets.AZURE_OPENAI_DEPLOYMENT_NAME }}"
+          $appsettings | ConvertTo-Json -Depth 100 | Out-File -FilePath ./Assignment.AppHost/appsettings.json -Encoding utf8 -Force
+          popd
 
       - name: Install azd
         uses: Azure/setup-azd@v1.0.0
