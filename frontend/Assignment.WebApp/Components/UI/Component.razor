@@ -3,20 +3,20 @@
 
 <div class="container">
     <div class="row">
-        <h2>Q & A</h2>
+        <h2>YouTube Summariser</h2>
     </div>
 
     <div class="row">
         <div class="col">
             <div class="mb-3">
-                <label for="question" class="form-label"><strong>Question</strong></label>
+                <label for="YouTube Link" class="form-label"><strong>Add YouTube line here</strong></label>
                 <input class="form-control" id="youtube-link" placeholder="Write your question here" @bind="question" />
             </div>
         </div>
         <div class="col">
             <div class="mb-3">
-                <label for="question-language-code" class="form-label"><strong>Question Language</strong></label>
-                <select class="form-select" id="video-language-code" aria-label="Question language code" @bind="questionLanguageCode">
+                <label for="question-language-code" class="form-label"><strong>Video Language</strong></label>
+                <select class="form-select" id="video-language-code" aria-label="Video language code" @bind="questionLanguageCode">
                     <option value="en" selected>English</option>
                     <option value="ko">Korean</option>
                 </select>
@@ -24,8 +24,8 @@
         </div>
         <div class="col">
             <div class="mb-3">
-                <label for="answer-language-code" class="form-label"><strong>Answer Language</strong></label>
-                <select class="form-select" id="summary-language-code" aria-label="Answer language code" @bind="answerLanguageCode">
+                <label for="answer-language-code" class="form-label"><strong>Summary Language</strong></label>
+                <select class="form-select" id="summary-language-code" aria-label="Summary language code" @bind="answerLanguageCode">
                     <option value="en" selected>English</option>
                     <option value="ko">Korean</option>
                 </select>
@@ -42,8 +42,8 @@
 
     <div class="row">
         <div class="mb-3">
-            <label for="answer" class="form-label"><strong>Answer</strong></label>
-            <textarea class="form-control" id="result" rows="10" placeholder="Answer will show here" readonly>@answer</textarea>
+            <label for="answer" class="form-label"><strong>Summary</strong></label>
+            <textarea class="form-control" id="result" rows="10" placeholder="Result will show here" readonly>@answer</textarea>
         </div>
     </div>
 </div>
