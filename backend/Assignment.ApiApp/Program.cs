@@ -1,3 +1,6 @@
+using Aliencube.YouTubeSubtitlesExtractor;
+using Aliencube.YouTubeSubtitlesExtractor.Abstractions;
+using Aliencube.YouTubeSubtitlesExtractor.Models;
 using Azure;
 using Azure.AI.OpenAI;
 
@@ -9,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
+builder.Services.AddHttpClient<IYouTubeVideo, YouTubeVideo>();
 builder.Services.AddScoped<AzureOpenAIClient>(sp =>
 {
     var config = sp.GetRequiredService<IConfiguration>();
@@ -82,30 +86,35 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 
 record AnswerRequest(string question, string questionLanguageCode, string? answerLanguageCode);
 
-internal class QNAService(AzureOpenAIClient openai, IConfiguration config)
+internal class QNAService(IYouTubeVideo youtube, AzureOpenAIClient openai, IConfiguration config)
 {
+    private readonly IYouTubeVideo _youtube = youtube ?? throw new ArgumentNullException(nameof(youtube));
     private readonly AzureOpenAIClient _openai = openai ?? throw new ArgumentNullException(nameof(openai));
     private readonly IConfiguration _config = config ?? throw new ArgumentNullException(nameof(config));
 
     public async Task<string> AnswerAsync(AnswerRequest req)
     {
-        string caption = req.question;
+        Subtitle subtitle = await this._youtube.ExtractSubtitleAsync(req.question, req.questionLanguageCode).ConfigureAwait(false);
+        string caption = subtitle.Content.Select(p => p.Text).Aggregate((a, b) => $"{a}\n{b}");
+
         var chat = this._openai.GetChatClient(this._config["OpenAI:DeploymentName"]);
+
         var messages = new List<ChatMessage>()
         {
             new SystemChatMessage(this._config["Prompt:System"]),
-            new SystemChatMessage($"Here's the answer. Answer the question in the given language code of \"{req.answerLanguageCode}\"."),
+            new SystemChatMessage($"Here's the transcript. Summarise it in 5 bullet point items in the given language code of \"{req.answerLanguageCode}\"."),
             new UserChatMessage(caption),
         };
-        ChatCompletionOptions options = new()
+
+        var options = new ChatCompletionOptions()
         {
             MaxTokens = int.TryParse(this._config["Prompt:MaxTokens"], out var maxTokens) ? maxTokens : 3000,
             Temperature = float.TryParse(this._config["Prompt:Temperature"], out var temperature) ? temperature : 0.7f,
         };
 
         var response = await chat.CompleteChatAsync(messages, options).ConfigureAwait(false);
-        var answer = response.Value.Content[0].Text;
+        var summary = response.Value.Content[0].Text;
 
-        return answer;
+        return summary;
     }
 }
