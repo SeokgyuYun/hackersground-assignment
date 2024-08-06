@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Assignment.ServiceDefaults\Assignment.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Assignment.ServiceDefaults\Assignment.ServiceDefaults.csproj" />
   </ItemGroup>
 
   <ItemGroup>

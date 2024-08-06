@@ -3,13 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontend", "frontend", "{D0CE639F-D3B7-4D82-B279-63A0E752D9BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.WebApp", "Assignment.WebApp\Assignment.WebApp.csproj", "{08361801-4D9C-4208-B5B4-B52C9B9B50AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.WebApp", "frontend\Assignment.WebApp\Assignment.WebApp.csproj", "{08361801-4D9C-4208-B5B4-B52C9B9B50AF}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{51E6F94A-3DF4-4155-A55A-F4B920E1FFEB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.ApiApp", "backend\Assignment.ApiApp\Assignment.ApiApp.csproj", "{0A064975-0D23-4C90-ACC5-40A9B7E36ABB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.ApiApp", "Assignment.ApiApp\Assignment.ApiApp.csproj", "{0A064975-0D23-4C90-ACC5-40A9B7E36ABB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.AppHost", "Assignment.AppHost\Assignment.AppHost.csproj", "{796AAEC9-54DC-4023-9D50-2E295F5F9486}"
 EndProject

@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\frontend\Assignment.WebApp\Assignment.WebApp.csproj" />
-    <ProjectReference Include="..\backend\Assignment.ApiApp\Assignment.ApiApp.csproj" />
+    <ProjectReference Include="..\Assignment.WebApp\Assignment.WebApp.csproj" />
+    <ProjectReference Include="..\Assignment.ApiApp\Assignment.ApiApp.csproj" />
   </ItemGroup>
 
 </Project>
